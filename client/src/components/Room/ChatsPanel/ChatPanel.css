@@ -1,0 +1,32 @@
+aside {
+  background-color: #b4b4dc;
+  min-width: 20vw;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-width: 1em;
+}
+
+.ChatList {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.ChatListItem {
+  width: 100%;
+}
+
+.ChatListButton {
+  width: 100%;
+  height: 2em;
+  font-size: 1.2em;
+  border: none;
+  padding: 10px 20px;
+  background-color: #b4b4dc;
+  text-align: left;
+}
+
+.ChatListButton:hover {
+  background-color: #5b8b93;
+}

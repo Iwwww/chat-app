@@ -1,0 +1,49 @@
+.line {
+  position: relative;
+  min-height: 1em;
+  margin-bottom: 7px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.message-body {
+  display: flex;
+  max-width: 80%;
+  min-width: 5em;
+  background-color: #fff;
+  border-radius: 1em;
+  text-align: left;
+  white-space: pre-line;
+  word-break: break-word;
+  overflow: hidden;
+  height: 100%;
+  padding: 0.5em;
+  display: flex;
+  flex-direction: column;
+  align-self: self-start;
+  border-bottom-left-radius: 0.25em;
+}
+
+.message-body.me {
+  background-color: #effdde;
+  align-self: self-end;
+  border-radius: 1em !important;
+  border-bottom-right-radius: 0.3em !important;
+}
+
+.content {
+  margin: 0.3em 0.1em;
+}
+
+.time-stamp {
+  color: grey;
+  display: flex;
+  justify-content: right;
+  font-size: 0.8em;
+}
+
+.auther {
+  color: blue;
+  font-size: 0.8em;
+}

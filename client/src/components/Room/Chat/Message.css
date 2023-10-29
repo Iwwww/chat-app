@@ -1,0 +1,88 @@
+.Line {
+  position: relative;
+  margin-bottom: 5px;
+  overflow: hidden;
+  margin-bottom: 7px;
+  min-height: 1em;
+  display: none;
+  padding-right: 1em;
+  padding-left: 1em;
+}
+
+.Line {
+  position: relative;
+  background-color: rgba(0, 0, 0, 0);
+  margin-bottom: 5px;
+  text-align: left;
+  white-space: pre-line;
+  overflow: hidden;
+  margin-bottom: 7px;
+  min-height: 1em;
+  display: flex;
+  flex-direction: column;
+
+  animation: slide-up-from-bottom 0.1s ease-in-out forwards;
+  animation-fill-mode: forwards;
+}
+
+@keyframes slide-up-from-bottom {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 100%;
+    transform: translateY(0);
+  }
+}
+
+.Container {
+  display: flex;
+  flex-direction: row;
+  max-width: 80%;
+  background-color: #fff;
+  border-radius: 1em;
+  text-align: left;
+  white-space: pre-line;
+  overflow: hidden;
+  height: 100%;
+  padding: 10px;
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  align-self: self-start;
+  border-bottom-left-radius: 0.3em;
+}
+
+.Container.You {
+  background-color: #effdde;
+  justify-content: center;
+  align-self: self-end;
+  min-width: 15%;
+  border-radius: 1em !important;
+  border-bottom-right-radius: 0.3em !important;
+}
+
+.TimeStamp {
+  color: grey;
+  display: flex;
+  justify-content: right;
+  font-size: 0.7em;
+}
+
+.MessageContent {
+  flex-direction: row;
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+
+.MessageContent.You {
+  display: flex;
+  justify-content: right;
+  width: fit-content;
+}
+
+.AutherName {
+  color: blue;
+  font-size: 0.8em;
+}
