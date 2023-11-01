@@ -1,1 +1,3 @@
 server/config.js
+.env*
+[todo|TODO]*
