@@ -1,9 +1,9 @@
 import express from "express";
 import cors from "cors";
 import { createServer } from "http";
-import mongoose from "mongoose";
+import cookieSession from "cookie-session";
 import { Server } from "socket.io";
-import { MONGODB_URI } from "./config/db.config.js";
+import "./config/db.config.js";
 import { ALLOWED_ORIGIN } from "./config/cors.config.js";
 import onConnection from "./socket_io/onConnection.js";
 import onError from "./utils/onError.js";
@@ -16,16 +16,75 @@ app.use(
 );
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(
+  cookieSession({
+    name: "chat-session",
+    keys: ["COOKIE_SECRET"],
+    httpOnly: true,
+  }),
+);
 app.use(onError);
 
-try {
-  await mongoose.connect(MONGODB_URI, {
+import db from "./models/index.js";
+import dbConfig from "./config/db.config.js";
+const Role = db.role;
+
+db.mongoose
+  .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log("DB connected");
+    initial();
+  })
+  .catch((err) => {
+    console.error("DB connection error", err);
+    process.exit();
   });
-  console.log("DB connected");
-} catch (e) {
-  onError(e);
+
+function initial() {
+  Role.estimatedDocumentCount()
+    .then((count) => {
+      if (count === 0) {
+        new Role({
+          name: "user",
+        })
+          .save()
+          .then(() => {
+            console.log("added 'user' to roles collections");
+          })
+          .catch((err) => {
+            console.log("error", err);
+          });
+
+        new Role({
+          name: "moderator",
+        })
+          .save()
+          .then(() => {
+            console.log("added 'moderator' to roles collections");
+          })
+          .catch((err) => {
+            console.log("error", err);
+          });
+
+        new Role({
+          name: "admin",
+        })
+          .save()
+          .then(() => {
+            console.log("added 'admin' to roles collections");
+          })
+          .catch((err) => {
+            console.log("error", err);
+          });
+      }
+    })
+    .catch((err) => {
+      console.log("Error getting role count:", err);
+    });
 }
 
 const server = createServer(app);

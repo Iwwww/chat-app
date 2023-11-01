@@ -1,1 +1,6 @@
-export const MONGODB_URI = "mongodb://127.0.0.1:27017/test";
+const dbConfig = {
+  HOST: "127.0.0.1",
+  PORT: "27017",
+  DB: "test2"
+}
+export default dbConfig;
