@@ -3,11 +3,6 @@ import mongoose from "mongoose";
 const { Schema, model } = mongoose;
 
 const userScheme = new Schema({
-  id: {
-    type: String,
-    required: true,
-    unique: true,
-  },
   username: {
     type: String,
     required: true,

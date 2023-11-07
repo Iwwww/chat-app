@@ -6,6 +6,7 @@ import { Server } from "socket.io";
 import "./config/db.config.js";
 import { ALLOWED_ORIGIN } from "./config/cors.config.js";
 import onConnection from "./socket_io/onConnection.js";
+import socketAuthJwt from "./socket_io/authSocketJwt.js";
 import onError from "./utils/onError.js";
 
 const app = express();
@@ -19,13 +20,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cookieSession({
-    name: "chat-session",
+    name: "access_token",
     keys: ["COOKIE_SECRET"],
     httpOnly: true,
   }),
 );
 app.use(onError);
 
+// DB
 import db from "./models/index.js";
 import dbConfig from "./config/db.config.js";
 const Role = db.role;
@@ -94,12 +96,20 @@ const io = new Server(server, {
   serveClient: false,
 });
 
-io.on("connection", (socket) => {
+io.use((socket, next) => {
+  socketAuthJwt(socket, next);
+}).on("connection", (socket) => {
   onConnection(io, socket);
 });
 
-import dotenv from "dotenv"
-dotenv.config()
+// routes
+import auth from "./routes/auth.routes.js";
+import user from "./routes/user.routes.js";
+auth(app);
+user(app);
+
+import dotenv from "dotenv";
+dotenv.config();
 
 const PORT = process.env.PORT || 4000;
 server.listen(PORT, () => {

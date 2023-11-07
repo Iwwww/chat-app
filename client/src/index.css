@@ -1,3 +1,27 @@
+:root {
+  --text: #252223;
+  --text-secondary: rgba(37, 34, 35, 0.5);
+  --background: #f3f3fc;
+  --primary: #c7c7f0;
+  --secondary: #e4e2e2;
+  --accent: #7f81b8;
+
+  --error: #cf0000;
+  --error-secondary: rgba(200, 0, 0, .6);
+
+  --static1: rgba(0, 0, 0, 0.03);
+
+  --radius1: 0.6em;
+  --radius2: 0.5em;
+
+  background-color: var(--background);
+}
+
+*::selection {
+  color: var(--background);
+  background-color: var(--accent);
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -8,7 +32,6 @@ body {
   width: 100vw;
   height: 100vh;
   max-height: 100vh;
-  background-color: #c8c8f0;
   display: flex;
   justify-content: center;
 }
@@ -16,4 +39,82 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+p {
+  margin: 0.4em 0;
+}
+
+h2 {
+  margin: 1em;
+}
+
+input {
+  border: 2px solid var(--color-5);
+  border-radius: var(--radius2);
+  height: 2em;
+  transition: box-shadow 0.2s;
+  transition: outline 0.2s;
+  margin: 0.4em;
+}
+
+input:focus {
+  outline: solid var(--accent);
+  /* outline: none; */
+  /* border: 2px solid red; */
+  box-shadow: 0 0 10px var(--accent);
+}
+
+input[type="submit"] {
+  color: var(--background);
+  background-color: var(--accent);
+  height: 2.4em;
+  /* margin: 1em 0; */
+}
+
+.vertical {
+  display: flex;
+  flex-direction: column;
+  margin: 1em;
+  padding: 1em;
+  background-color: var(--static1);
+  border-radius: var(--radius1);
+}
+
+.center {
+  justify-self: center;
+  align-self: center;
+}
+
+.input-box {
+  position: relative;
+  width: 15em;
+  margin: 0.5em 0.5em;
+}
+
+.input-box input {
+  width: 100%;
+}
+
+.input-box label {
+  position: absolute;
+  transform: translateX(0.5em) translateY(-50%);
+  pointer-events: none;
+  transition: 0.2s;
+  top: 50%;
+  left: 0.7em;
+  color: var(--text-secondary);
+}
+
+.input-box input:focus ~ label,
+.input-box input:not(:placeholder-shown) ~ label {
+  top: -0.5em;
+  left: 0.5em;
+  font-size: 70%;
+  color: var(--text);
+  font-weight: 550;
+}
+
+.input-box input:invalid {
+  background-color: var(--error-secondary);
 }

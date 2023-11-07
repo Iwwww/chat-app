@@ -14,6 +14,9 @@ export default function useChat() {
         roomId: user.roomId,
         userName: user.userName,
       },
+      auth: {
+        token: "",
+      },
     }),
   );
 

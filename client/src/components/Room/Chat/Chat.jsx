@@ -8,6 +8,10 @@ function Chat() {
   const { users, messages, log, sendMessage, removeMessage } = useChat();
   const messageInputRef = useRef(null);
 
+  useEffect(() => {
+    console.log("session storage:", sessionStorage.key);
+  });
+
   function onChatSendClick() {
     const messageValue = messageInputRef.current.value;
     // let isValid = messageValue !== "";
@@ -23,17 +27,17 @@ function Chat() {
         <p className="chat-name">Chat</p>
       </header>
 
-        <div className="messages-container center scroll">
-          <MessageList
-            log={log}
-            messages={messages}
-            removeMessage={removeMessage}
-          />
-        </div>
+      <div className="messages-container center scroll">
+        <MessageList
+          log={log}
+          messages={messages}
+          removeMessage={removeMessage}
+        />
+      </div>
 
-        <footer className="footer">
-          <MessageInput sendMessage={sendMessage} />
-        </footer>
+      <footer className="footer">
+        <MessageInput sendMessage={sendMessage} />
+      </footer>
     </div>
   );
 }

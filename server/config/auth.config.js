@@ -1,5 +1,6 @@
-require("dotenv").config();
+import dotenv from "dotenv";
+dotenv.config();
 
 export default {
-  secret: process.env.AUTH_SECRET,
+  secret: process.env.TOKEN_SECRET_KEY,
 };

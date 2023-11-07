@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import config from "../config/auth.config.js";
-import db from "../models";
+import db from "../models/index.js";
 const User = db.user;
 const Role = db.role;
 
@@ -22,64 +22,44 @@ const verifyToken = (req, res, next) => {
   });
 };
 
-const isAdmin = (req, res, next) => {
-  User.findById(req.userId).exec((err, user) => {
-    if (err) {
-      res.status(500).send({ message: err });
-      return;
-    }
-
-    Role.find(
-      {
-        _id: { $in: user.roles },
-      },
-      (err, roles) => {
-        if (err) {
-          res.status(500).send({ message: err });
-          return;
+const isAdmin = async (req, res, next) => {
+  await User.findById(req.userId)
+    .then(async (user) => {
+      await Role.find({ _id: { $in: user.roles } }).then((roles) => {
+        if (!roles.some((role) => role.name === "admin")) {
+          throw {
+            message: "Require Admin Role!",
+            status: 403,
+          };
         }
-
-        for (let i = 0; i < roles.length; i++) {
-          if (roles[i].name === "admin") {
-            next();
-            return;
-          }
-        }
-
-        res.status(403).send({ message: "Require Admin Role!" });
-      },
-    );
-  });
+        next();
+      });
+    })
+    .catch((err) => {
+      res.status(err.status || 500).send({
+        message: err.message || "An error occurred while verifying the user.",
+      });
+    });
 };
 
-const isModerator = (req, res, next) => {
-  User.findById(req.userId).exec((err, user) => {
-    if (err) {
-      res.status(500).send({ message: err });
-      return;
-    }
-
-    Role.find(
-      {
-        _id: { $in: user.roles },
-      },
-      (err, roles) => {
-        if (err) {
-          res.status(500).send({ message: err });
-          return;
+const isModerator = async (req, res, next) => {
+  await User.findById(req.userId)
+    .then(async (user) => {
+      await Role.find({ _id: { $in: user.roles } }).then((roles) => {
+        if (!roles.some((role) => role.name === "moderator")) {
+          throw {
+            message: "Require Moderator Role!",
+            status: 403,
+          };
         }
-
-        for (let i = 0; i < roles.length; i++) {
-          if (roles[i].name === "moderator") {
-            next();
-            return;
-          }
-        }
-
-        res.status(403).send({ message: "Require Moderator Role!" });
-      },
-    );
-  });
+        next();
+      });
+    })
+    .catch((err) => {
+      res.status(err.status || 500).send({
+        message: err.message || "An error occurred while verifying the user.",
+      });
+    });
 };
 
 const authJwt = {
