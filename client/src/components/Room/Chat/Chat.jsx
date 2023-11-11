@@ -22,11 +22,6 @@ function Chat() {
   return (
     <div className="chat">
       <div className="background"></div>
-
-      <header className="header">
-        <p className="chat-name">Chat</p>
-      </header>
-
       <div className="messages-container center scroll">
         <MessageList
           log={log}
@@ -34,7 +29,6 @@ function Chat() {
           removeMessage={removeMessage}
         />
       </div>
-
       <footer className="footer">
         <MessageInput sendMessage={sendMessage} />
       </footer>

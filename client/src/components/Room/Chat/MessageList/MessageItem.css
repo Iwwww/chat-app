@@ -32,10 +32,10 @@
   border-bottom-right-radius: 0.3em !important;
 }
 
-.content {
-  margin: 0.3em 0.1em;
-  overflow: hidden;
-}
+/* .content { */
+/*   margin: 0.3em 0.1em; */
+/*   overflow: hidden; */
+/* } */
 
 .time-stamp {
   color: grey;

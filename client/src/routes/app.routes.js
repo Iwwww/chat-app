@@ -1,16 +1,16 @@
-import { Home } from "../pages/Home/Home";
-import { SignIn } from "../components/SignIn/SignIn";
-import { SignUp } from "../components/SignUp/SignUp";
+import { HomePage, SignInPage, SignUpPage } from "../pages";
 import { Route, Routes } from "react-router-dom";
-import RedirectHome from "../pages/SignIn/redirect";
+import Redirect from "../pages/Redirect";
+import Chat from "../components/Room/Chat/Chat";
 
 
 const AppRoutes = () => (
   <Routes>
-    <Route path="*" element={<RedirectHome />} />
-    <Route path="home/" element={<Home />} />
-    <Route path="signin/" element={<SignIn />} />
-    <Route path="signup/" element={<SignUp />} />
+    {/* <Route path="*" element={<Redirect path="/home" />} /> */}
+    <Route path="/" element={<HomePage />} />
+    <Route path="/chat" element={<Chat />} />
+    <Route path="/signin" element={<SignInPage />} />
+    <Route path="/signup" element={<SignUpPage />} />
   </Routes>
 );
 

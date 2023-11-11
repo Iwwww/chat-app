@@ -1,7 +1,8 @@
 .chat {
   min-height: 50vh;
   min-width: 10em;
-  height: 100lvh;
+  /* minus nav bar height */
+  /* height: calc(100vh - 22vh); */
   width: 100vw;
   overflow-y: hidden;
   display: flex;
@@ -39,6 +40,7 @@
 .chat .messages-container {
   margin-top: auto;
   width: 100%;
+  height: max-content;
 }
 
 .chat .footer {

@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 :root {
   --text: #252223;
   --text-secondary: rgba(37, 34, 35, 0.5);
@@ -6,13 +10,19 @@
   --secondary: #e4e2e2;
   --accent: #7f81b8;
 
+  --nav-background: #5c5e95;
+  --nav-background-active: #484a81;
+  --nav-background-hover: #4d4f86;
+  --nav-text: #dee0fe;
+
   --error: #cf0000;
-  --error-secondary: rgba(200, 0, 0, .6);
+  --error-secondary: rgba(200, 0, 0, 0.6);
 
   --static1: rgba(0, 0, 0, 0.03);
 
   --radius1: 0.6em;
   --radius2: 0.5em;
+  --radius3: 0.3em;
 
   background-color: var(--background);
 }
@@ -29,10 +39,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  width: 100vw;
-  height: 100vh;
-  max-height: 100vh;
-  display: flex;
   justify-content: center;
 }
 
@@ -49,19 +55,63 @@ h2 {
   margin: 1em;
 }
 
+nav {
+  background-color: var(--nav-background);
+  color: var(--nav-text);
+  padding: 0 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.site-title {
+  font-size: 1.5rem;
+}
+
+nav ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  gap: 1rem;
+  display: flex;
+}
+
+nav li {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+nav li.active {
+  background-color: var(--nav-background-active);
+}
+
+nav a {
+  color: inherit;
+  text-decoration: none;
+  padding: 0.25rem;
+}
+
+nav li:hover {
+  background-color: var(--nav-background-hover);
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+
 input {
   border: 2px solid var(--color-5);
   border-radius: var(--radius2);
   height: 2em;
   transition: box-shadow 0.2s;
   transition: outline 0.2s;
-  margin: 0.4em;
+  margin: 0.4em 0;
 }
 
 input:focus {
   outline: solid var(--accent);
-  /* outline: none; */
-  /* border: 2px solid red; */
   box-shadow: 0 0 10px var(--accent);
 }
 
@@ -69,16 +119,23 @@ input[type="submit"] {
   color: var(--background);
   background-color: var(--accent);
   height: 2.4em;
-  /* margin: 1em 0; */
+}
+
+.error {
+  color: var(--error);
+}
+
+.error-container {
+  padding: 0 0.5em;
+  font-weight: 550;
+  color: var(--background);
+  background: var(--error-secondary);
+  border-radius: var(--radius3);
 }
 
 .vertical {
   display: flex;
   flex-direction: column;
-  margin: 1em;
-  padding: 1em;
-  background-color: var(--static1);
-  border-radius: var(--radius1);
 }
 
 .center {
@@ -86,10 +143,30 @@ input[type="submit"] {
   align-self: center;
 }
 
+.content {
+  margin-top: 3em;
+  /* background: red; */
+}
+
+.form input[type="button"],
+.form input[type="submit"] {
+  width: 100%;
+}
+
+.form .error-container {
+  margin-bottom: 10px;
+}
+.form input[type="submit"] {
+  margin-top: 20px;
+}
+
+.form .input-box {
+  margin-top: 15px;
+}
+
 .input-box {
   position: relative;
-  width: 15em;
-  margin: 0.5em 0.5em;
+  width: 100%;
 }
 
 .input-box input {
@@ -102,14 +179,14 @@ input[type="submit"] {
   pointer-events: none;
   transition: 0.2s;
   top: 50%;
-  left: 0.7em;
+  left: 5px;
   color: var(--text-secondary);
 }
 
 .input-box input:focus ~ label,
 .input-box input:not(:placeholder-shown) ~ label {
   top: -0.5em;
-  left: 0.5em;
+  left: 0px;
   font-size: 70%;
   color: var(--text);
   font-weight: 550;
@@ -117,4 +194,18 @@ input[type="submit"] {
 
 .input-box input:invalid {
   background-color: var(--error-secondary);
+}
+
+.index-signin {
+  background-color: var(--static1);
+  border-radius: var(--radius1);
+  padding: 1em;
+  width: 230px;
+}
+
+.index-signin .signup-btn {
+  color: var(--background);
+  background-color: #4bb34b;
+  height: 2.4em;
+  margin-top: 10px;
 }

@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import { createServer } from "http";
-import cookieSession from "cookie-session";
+import session from "express-session";
 import { Server } from "socket.io";
 import "./config/db.config.js";
 import { ALLOWED_ORIGIN } from "./config/cors.config.js";
@@ -19,12 +19,20 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
-  cookieSession({
-    name: "access_token",
-    keys: ["COOKIE_SECRET"],
-    httpOnly: true,
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      sameSite: "strict",
+      maxAge: parseInt(process.env.SESSION_MAX_AGE),
+    },
   }),
 );
+app.use((req, res, next) => {
+  console.log("session:", req.session);
+  next();
+})
 app.use(onError);
 
 // DB
@@ -92,7 +100,7 @@ function initial() {
 const server = createServer(app);
 
 const io = new Server(server, {
-  cors: ALLOWED_ORIGIN,
+  cors: process.env.ALLOWED_ORIGIN,
   serveClient: false,
 });
 

@@ -2,5 +2,5 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export default {
-  secret: process.env.TOKEN_SECRET_KEY,
+  secret: process.env.JWT_SECRET,
 };

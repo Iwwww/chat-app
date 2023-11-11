@@ -23,7 +23,8 @@ const verifyToken = (req, res, next) => {
 };
 
 const isAdmin = async (req, res, next) => {
-  await User.findById(req.userId)
+  const {user} = req.session
+  await User.findById(user._id)
     .then(async (user) => {
       await Role.find({ _id: { $in: user.roles } }).then((roles) => {
         if (!roles.some((role) => role.name === "admin")) {
