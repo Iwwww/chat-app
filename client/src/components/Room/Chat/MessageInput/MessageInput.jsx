@@ -35,6 +35,7 @@ export default function MessageInput({ sendMessage }) {
   return (
     <form onSubmit={onSubmit} className="form message">
       <input
+        className="message-input"
         type="text"
         autoFocus
         placeholder="Message"

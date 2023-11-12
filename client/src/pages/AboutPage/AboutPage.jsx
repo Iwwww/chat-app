@@ -1,10 +1,11 @@
 import React from "react";
-import { Room } from "../../components/Room/Room";
-import useUser from "../../hooks/useUser";
-import Redirect from "../Redirect";
 
-export const HomePage = () => {
-  // const {  } = useUser();
+export const AboutPage = () => {
 
-  return isAuthenticated() ? <Room /> : <Redirect path="/signin" />;
+  return (
+    <div className="vertical center">
+      <h1>About</h1>
+      <p>Simple Chat App</p>
+</div>
+  )
 };

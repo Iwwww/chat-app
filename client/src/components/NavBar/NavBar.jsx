@@ -8,13 +8,14 @@ const NavBar = () => {
   return (
     <header>
       <nav className="nav">
-        <a className="site-title">Site title</a>
+        <CustomLink to="/" className="site-title">This site</CustomLink>
         <ul>
-          <CustomLink to="/">Home</CustomLink>
           {isAuth ? <CustomLink to="/chat">Chat</CustomLink> : null}
           <CustomLink to="/about">About</CustomLink>
           {isAuth ? (
-            <CustomLink to="/signin" onClick={signout}>Sign Out</CustomLink>
+            <CustomLink to="/signin" onClick={signout}>
+              Sign Out
+            </CustomLink>
           ) : (
             // <a onClick={signout}>Sign Out</a>
             <CustomLink to="/signin">Sign In</CustomLink>
