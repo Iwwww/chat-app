@@ -5,12 +5,12 @@ const db = {};
 
 db.mongoose = mongoose;
 
-import user from "./user.model.js"
-import role from "./role.model.js"
+import user from "./user.model.js";
+import role from "./role.model.js";
+import room from "./room.model.js";
 db.user = user;
 db.role = role;
-// db.user = require("./user.model");
-// db.role = require("./role.model");
+db.room = room;
 
 db.ROLES = ["user", "admin", "moderator"];
 

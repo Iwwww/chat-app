@@ -122,9 +122,10 @@ io.use((socket, next) => {
 // routes
 import auth from "./routes/auth.routes.js";
 import user from "./routes/user.routes.js";
+import room from "./routes/room.routes.js";
 auth(app);
 user(app);
-
+room(app);
 
 const PORT = process.env.PORT || 4000;
 server.listen(PORT, () => {
