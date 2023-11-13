@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import useUser from "../../hooks/useUser";
+import useAuth from "../../hooks/useAuth";
 
 export const SignIn = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const nameInputRef = useRef(null);
   const passwordInputRef = useRef(null);
   const navigate = useNavigate();
-  const { getUser, setUser, setToken, isAuthenticated } = useUser();
+  const { getUser, setUser, setToken, isAuthenticated } = useAuth();
 
   useEffect(() => {
     nameInputRef.current.focus();
@@ -61,7 +61,7 @@ export const SignIn = () => {
         setToken(res.data.token);
       })
       .then(() => {
-        window.location.reload()
+        window.location.reload();
       })
       .catch((err) => {
         if (err.response) {

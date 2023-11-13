@@ -1,10 +1,10 @@
 import React from "react";
 import { SignIn } from "../../components/SignIn/SignIn";
-import useUser from "../../hooks/useUser";
+import useAuth from "../../hooks/useAuth";
 import Redirect from "../Redirect";
 
 export const SignInPage = () => {
-  const { isAuthenticated } = useUser();
+  const { isAuthenticated } = useAuth();
 
   return isAuthenticated() ? <Redirect path="/" /> : <SignIn />;
 };

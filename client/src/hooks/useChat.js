@@ -1,20 +1,22 @@
 import { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 import Cookies from "js-cookie";
+import useAuth from "./useAuth";
 
 export default function useChat() {
-  // const user = JSON.parse(JSON.stringify(Cookies.get("user")).username);
+  const [room, setRoom] = useState({});
   const [users, setUsers] = useState([]);
   const [messages, setMessages] = useState([]);
   const [log, setLog] = useState(null);
-  // const { current: socket } = useRef(
+  const { isAuth, getUser, getToken } = useAuth();
+  // const { socket } = useRef(
   //   io(process.env.REACT_APP_SERVER_SOCKET, {
   //     query: {
-  //       roomId: user.roomId,
-  //       userName: user.userName,
+  //       room: room,
+  //       user: getUser(),
   //     },
   //     auth: {
-  //       token: "",
+  //       token: getToken(),
   //     },
   //   }),
   // );
@@ -48,5 +50,10 @@ export default function useChat() {
     // socket.emit("message:remove", message);
   };
 
-  return { users, messages, log, sendMessage, removeMessage };
+  const joinRoom = (room) => {
+    setRoom(room._id);
+    console.log("joinRoom:", room);
+  };
+
+  return { users, messages, log, sendMessage, removeMessage, room, joinRoom };
 }

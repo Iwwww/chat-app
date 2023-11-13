@@ -1,10 +1,11 @@
 import React from "react";
 import { Room } from "../../components/Room/Room";
-import useUser from "../../hooks/useUser";
+import useAuth from "../../hooks/useAuth";
 import Redirect from "../Redirect";
 
 export const ChatPage = () => {
-  const { isAuth } = useUser();
+  const { isAuth } = useAuth();
 
+  console.log("isAuth:", isAuth ? "true" : "false");
   return isAuth ? <Room /> : <Redirect path="/signin" />;
 };

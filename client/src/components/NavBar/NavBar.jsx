@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
-import useUser from "../../hooks/useUser";
+import useAuth from "../../hooks/useAuth";
 
 const NavBar = () => {
-  const { isAuth, signout } = useUser();
+  const { isAuth, signout, getUser } = useAuth();
 
   return (
     <header>
       <nav className="nav">
-        <CustomLink to="/" className="site-title">This site</CustomLink>
+        <CustomLink to="/" className="site-title">
+          This site
+        </CustomLink>
         <ul>
           {isAuth ? <CustomLink to="/chat">Chat</CustomLink> : null}
+          {isAuth ? <CustomLink to="/chats_list">Chats List</CustomLink> : null}
+          {isAuth ? <CustomLink to="/">{getUser().username}</CustomLink> : null}
           <CustomLink to="/about">About</CustomLink>
           {isAuth ? (
             <CustomLink to="/signin" onClick={signout}>

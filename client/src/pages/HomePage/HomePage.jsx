@@ -1,6 +1,12 @@
 import React from "react";
 
 export const HomePage = () => {
-
-  return <h1>Home</h1>;
+  return (
+    <>
+      <div className="flex center">
+        <h1>Home</h1>
+        <p>Sign in to use chat</p>
+      </div>
+    </>
+  );
 };

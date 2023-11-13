@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
 
-export default function useUser() {
+// TODO:
+// 1. Go away from states use only cookies
+export default function useAuth() {
   const [user, setUserState] = useState(JSON.stringify(Cookies.get("user")));
   const [token, setTokenState] = useState(Cookies.get("token"));
   const [isAuth, setIsAuth] = useState(() => {
@@ -69,7 +71,7 @@ export default function useUser() {
       }
     }
 
-    return JSON.parse(user);
+    return JSON.parse(JSON.parse(user));
   };
 
   const getToken = () => {
