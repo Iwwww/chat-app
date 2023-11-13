@@ -19,11 +19,18 @@ $ cd chat-app/
 $ npm install
 ```
 
+## Configure enviroment variables
+
+Rename `[env.example](server/env.example)` to `.env` and `[env.development.example](client/env.development.example)` to `.env.development`
+
+```sh
+$ cp server/env.example server/.env
+$ cp client/env.development.example client/.env.development
+```
+
 ## Start server and client
 
 - _Don't foget to start MongoDB server before start server_
-
-- _Don't foget to setup enviroment variables to your needs_
 
 ```sh
 $ npm run start-server
