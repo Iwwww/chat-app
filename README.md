@@ -21,7 +21,7 @@ $ npm install
 
 ## Configure enviroment variables
 
-Rename `[env.example](server/env.example)` to `.env` and `[env.development.example](client/env.development.example)` to `.env.development`
+Rename [`env.example`](server/env.example) to `.env` and [`env.development.example`](client/env.development.example) to `.env.development`
 
 ```sh
 $ cp server/env.example server/.env
