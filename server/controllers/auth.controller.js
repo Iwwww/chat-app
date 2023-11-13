@@ -1,4 +1,3 @@
-import config from "../config/auth.config.js";
 import db from "../models/index.js";
 const User = db.user;
 const Role = db.role;
@@ -8,7 +7,7 @@ import bcrypt from "bcryptjs";
 
 const requireAuth = async (req, res, next) => {
   const { user } = req.session;
-  console.log("user:", JSON.stringify(req.session.user));
+  // console.log("user:", JSON.stringify(req.session.user));
   if (!user) {
     return res.status(401).send({ message: "Unauthorized" });
   }
@@ -82,7 +81,7 @@ const signin = async (req, res) => {
         };
       }
 
-      const token = jwt.sign({ id: user.id }, config.secret, {
+      const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
         algorithm: "HS256",
         allowInsecureKeySizes: true,
         expiresIn: 86400, // 24 hours
@@ -96,7 +95,7 @@ const signin = async (req, res) => {
 
       req.session.token = token;
       req.session.user = user;
-      console.log("signin, user:", user);
+      // console.log("signin, user:", user);
 
       res.status(200).send({
         message: "Aunthentification success!",
@@ -120,7 +119,7 @@ const signout = async (req, res) => {
     req.session.destroy(null);
     return res.status(200).send({ message: "You have been signed out!" });
   } catch (err) {
-    console.log("error signout:", err);
+    // console.log("error signout:", err);
     // next(err);
   }
 };

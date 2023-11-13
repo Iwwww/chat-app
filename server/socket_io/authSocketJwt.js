@@ -1,5 +1,4 @@
 import jwt from "jsonwebtoken";
-import authConfig from "../config/auth.config.js";
 
 function auth(socket, next) {
   const token = socket.handshake.auth?.token;
@@ -10,7 +9,7 @@ function auth(socket, next) {
       throw { message: "Token is not provided." };
     }
 
-    jwt.verify(token, authConfig.secret, (err, decode) => {
+    jwt.verify(token, process.env.JWT_SECRET, (err, decode) => {
       if (err) {
         throw { message: "Not authorized." };
       }

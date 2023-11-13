@@ -3,16 +3,17 @@ import cors from "cors";
 import { createServer } from "http";
 import session from "express-session";
 import { Server } from "socket.io";
-import "./config/db.config.js";
-import { ALLOWED_ORIGIN } from "./config/cors.config.js";
 import onConnection from "./socket_io/onConnection.js";
 import socketAuthJwt from "./socket_io/authSocketJwt.js";
 import onError from "./utils/onError.js";
 
+import dotenv from "dotenv";
+dotenv.config();
+
 const app = express();
 app.use(
   cors({
-    origin: ALLOWED_ORIGIN,
+    origin: process.env.ALLOWED_ORIGIN,
   }),
 );
 
@@ -37,11 +38,10 @@ app.use(onError);
 
 // DB
 import db from "./models/index.js";
-import dbConfig from "./config/db.config.js";
 const Role = db.role;
 
 db.mongoose
-  .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
+  .connect(process.env.DB, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -116,8 +116,6 @@ import user from "./routes/user.routes.js";
 auth(app);
 user(app);
 
-import dotenv from "dotenv";
-dotenv.config();
 
 const PORT = process.env.PORT || 4000;
 server.listen(PORT, () => {
