@@ -41,7 +41,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  height: 100vh;
+  height: 100dvh;
 }
 
 code {
@@ -140,8 +140,8 @@ input[type="submit"] {
 }
 
 .center {
-  justify-self: center;
-  align-self: center;
+  justify-content: center;
+  align-content: center;
 }
 
 .content {
@@ -214,6 +214,15 @@ input[type="submit"] {
 
 .container {
   height: calc(100vh - var(--nav-height));
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+}
+
+.room {
+  height: inherit;
 }
 
 .chat-container {
