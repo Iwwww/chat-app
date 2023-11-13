@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import { createServer } from "http";
 import session from "express-session";
+import { default as connectMongoDBSession } from "connect-mongodb-session";
 import { Server } from "socket.io";
 import onConnection from "./socket_io/onConnection.js";
 import socketAuthJwt from "./socket_io/authSocketJwt.js";
@@ -17,17 +18,28 @@ app.use(
   }),
 );
 
+const MongoDBStore = connectMongoDBSession(session);
+var store = new MongoDBStore({
+  uri: process.env.DB_SESSION_STORE,
+  collection: "mySessions",
+});
+
+store.on("error", function (error) {
+  console.log(error);
+});
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: true,
     cookie: {
       sameSite: "strict",
       maxAge: parseInt(process.env.SESSION_MAX_AGE),
     },
+    store: store,
+    resave: true,
+    saveUninitialized: true,
   }),
 );
 app.use((req, res, next) => {
